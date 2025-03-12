@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +21,7 @@ import com.application.TicketingApp.model.Tourist;
 import com.application.TicketingApp.service.TouristService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public class TouristController 
 {
 	@Autowired
@@ -107,13 +109,7 @@ public class TouristController
 	@PutMapping("/update")
 	public ResponseEntity<String> updateTouristInfo(@RequestBody Tourist tourist)
 	{
-		try
-		{
-			return new ResponseEntity<String>(service.updateTouristInfo(tourist),HttpStatus.OK);
-		}catch(TouristNotfoundException e)
-		{
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
-		}
+		return new ResponseEntity<String>(service.updateTouristInfo(tourist),HttpStatus.OK);
 	}
 	
 	@PatchMapping("/updateBudgetByID/{id}/{budget}")
@@ -126,5 +122,10 @@ public class TouristController
 		{
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
+	}
+	@DeleteMapping("/deleteTourist/{id}")
+	public ResponseEntity<String> deleteTourist(@PathVariable("id") Integer id)
+	{
+		return new ResponseEntity<String>(service.deleteById(id),HttpStatus.OK);
 	}
 }

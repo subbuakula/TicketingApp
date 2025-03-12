@@ -25,7 +25,7 @@ public class TouristServiceImpl implements TouristService {
 	@Override
 	public List<Tourist> findAll() {
 		
-		return repo.findAll();
+		return repo.findAll();		
 	}
 
 	@Override
@@ -83,5 +83,15 @@ public class TouristServiceImpl implements TouristService {
 			return "Tourist with "+id+" is Updated Successfully.";
 		}
 		else throw new TouristNotfoundException("Given Tourist is not Available."); 
+	}
+
+	@Override
+	public String deleteById(int id) {
+		if(repo.findById(id).isPresent())
+		{
+			repo.deleteById(id);
+			return "Tourist with "+id+" deleted Successfully.";
+		}
+		else throw new TouristNotfoundException("Given Tourist is not Available for Deletion."); 		
 	}
 }

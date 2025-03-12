@@ -18,4 +18,6 @@ public interface TouristService
 	//Update Methods
 	String updateTouristInfo(Tourist tourist);
 	String updateTouristBudgetById(Integer id, Double budget);
+	//Delete methods
+	String deleteById(int id);
 }
