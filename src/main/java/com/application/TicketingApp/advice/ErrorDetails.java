@@ -2,6 +2,9 @@ package com.application.TicketingApp.advice;
 
 import java.time.LocalDateTime;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+@XmlRootElement(name = "Error Details")
 public class ErrorDetails 
 {
 	private String statusCode;
@@ -42,6 +45,7 @@ public class ErrorDetails
 	}
 
 
+	@XmlElement(name="timeStamp")
 	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}

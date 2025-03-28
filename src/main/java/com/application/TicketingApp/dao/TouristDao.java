@@ -6,9 +6,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import com.application.TicketingApp.model.Tourist;
-
+import com.application.TicketingApp.entity.Tourist;
+@Repository
 public interface TouristDao extends JpaRepository<Tourist, Integer> 
 {
 	// Custom Finder Methods using Keywords to retrieve data 
