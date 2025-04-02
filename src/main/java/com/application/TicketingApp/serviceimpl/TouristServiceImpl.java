@@ -1,4 +1,4 @@
-package com.application.TicketingApp.service;
+package com.application.TicketingApp.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,8 @@ import com.application.TicketingApp.entity.Tourist;
 import com.application.TicketingApp.exception.TouristNotfoundException;
 import com.application.TicketingApp.model.TouristBean;
 import com.application.TicketingApp.model.TouristBeanList;
-import com.application.TicketingApp.utils.TouristUtils;
+import com.application.TicketingApp.service.TouristService;
+import com.application.TicketingApp.utils.Utility;
 
 @Service
 public class TouristServiceImpl implements TouristService {
@@ -33,7 +34,7 @@ public class TouristServiceImpl implements TouristService {
 		ArrayList<TouristBean> beanList = new ArrayList<>();
 		for(Tourist tourist : touristList)
 		{
-			beanList.add(TouristUtils.entityToBean(tourist));
+			beanList.add(Utility.entityToBean(tourist));
 		}
 		
 		return new TouristBeanList(beanList);
@@ -45,7 +46,7 @@ public class TouristServiceImpl implements TouristService {
 		
 		Tourist tourist = repo.findById(id)
 				   .orElseThrow(() -> new TouristNotfoundException("Tourist with ID "+id+" not found."));
-		return TouristUtils.entityToBean(tourist);
+		return Utility.entityToBean(tourist);
 	}
 
 	public TouristBeanList findByPackageType(String packageType)
@@ -53,7 +54,7 @@ public class TouristServiceImpl implements TouristService {
 		List<Tourist> touristList =  repo.findByPackageType(packageType)
 				.orElseThrow(() -> new TouristNotfoundException("Tourists with package "+packageType+" are not found."));
 		
-		return  new TouristBeanList(new ArrayList<TouristBean>(touristList.stream().map(TouristUtils::entityToBean).toList()));
+		return  new TouristBeanList(new ArrayList<TouristBean>(touristList.stream().map(Utility::entityToBean).toList()));
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class TouristServiceImpl implements TouristService {
 		// TODO Auto-generated method stub
 		List<Tourist> touristList = repo.findByBudgetBetween(budget1, budget2)
 				.orElseThrow(() -> new TouristNotfoundException("Tourists not found"));
-		return new TouristBeanList(new ArrayList<TouristBean>(touristList.stream().map(TouristUtils::entityToBean).toList()));
+		return new TouristBeanList(new ArrayList<TouristBean>(touristList.stream().map(Utility::entityToBean).toList()));
 		}
 
 	@Override

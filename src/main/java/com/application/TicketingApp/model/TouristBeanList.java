@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement(name = "tourists")
-public class TouristBeanList 
+public class TouristBeanList
 {
 //	 @XmlElementWrapper(name = "tourists") // Wrapper element
 //	 @XmlElement(name = "tourist") // Individual elements

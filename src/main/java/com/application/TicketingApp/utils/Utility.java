@@ -1,9 +1,11 @@
 package com.application.TicketingApp.utils;
 
+import com.application.TicketingApp.entity.CourseEntity;
 import com.application.TicketingApp.entity.Tourist;
+import com.application.TicketingApp.model.Course;
 import com.application.TicketingApp.model.TouristBean;
 
-public class TouristUtils 
+public class Utility 
 {
 	public static TouristBean entityToBean(Tourist e)
 	{
@@ -14,6 +16,16 @@ public class TouristUtils
 		bean.setPackageType(e.getPackageType());
 		bean.setBudget(e.getBudget());
 		return bean;
+	}
+	
+	public static Course entityToBean(CourseEntity e)
+	{
+		Course course = new Course();
+		course.setCid(e.getCid());
+		course.setCname(e.getCname());
+		course.setCprice(e.getCprice());
+		course.setCproctor(e.getCproctor());
+		return course;
 	}
 
 }

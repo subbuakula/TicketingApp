@@ -3,6 +3,8 @@ package com.application.TicketingApp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +50,10 @@ public class TouristController
 	{
 		try
 		{
-			return new ResponseEntity<TouristBean>(service.findById(id),HttpStatus.OK);
+				TouristBean bean = service.findById(id);
+				Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CourseController.class).getAllCourses()).withRel("/getAllCourses");
+			    bean.add(link);
+				return new ResponseEntity<TouristBean>(bean,HttpStatus.OK);
 		}catch(TouristNotfoundException e)
 		{
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
