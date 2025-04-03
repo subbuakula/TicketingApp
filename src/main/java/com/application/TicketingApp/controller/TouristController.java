@@ -136,6 +136,13 @@ public class TouristController
 		return new ResponseEntity<String>(service.deleteById(id),HttpStatus.OK);
 	}
 	
+	
+	@GetMapping("/getPackages")
+	public ResponseEntity<List<String>> getPackages()
+	{
+		return new ResponseEntity<List<String>>(service.findAvaialablePacakges(),HttpStatus.OK);
+	}
+	//For Testing purpose.
 	@GetMapping(value = "/getException", produces={"application/xml","application/json"})
 	public ResponseEntity<?> getException() throws Exception
 	{

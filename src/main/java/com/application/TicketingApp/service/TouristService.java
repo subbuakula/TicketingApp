@@ -22,4 +22,6 @@ public interface TouristService
 	String updateTouristBudgetById(Integer id, Double budget);
 	//Delete methods
 	String deleteById(int id);
+	List<String> findAvaialablePacakges();
+	
 }

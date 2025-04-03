@@ -22,4 +22,6 @@ public interface TouristDao extends JpaRepository<Tourist, Integer>
 	@Query("SELECT name FROM Tourist WHERE packageType=:pack1 OR packageType=:pack2")
 	Optional<List<String>> findTouristswithPackage(@Param("pack1")String package1, @Param("pack2")String package2);
 	
+	@Query("SELECT DISTINCT(packageType) from Tourist")
+	Optional<List<String>> findAvailablePackages();
 }

@@ -111,4 +111,11 @@ public class TouristServiceImpl implements TouristService {
 		}
 		else throw new TouristNotfoundException("Given Tourist is not Available for Deletion."); 		
 	}
+
+	@Override
+	public List<String> findAvaialablePacakges() {
+		
+		return repo.findAvailablePackages()
+				   .orElseThrow(() -> new TouristNotfoundException("No packages Found."));
+	}
 }
