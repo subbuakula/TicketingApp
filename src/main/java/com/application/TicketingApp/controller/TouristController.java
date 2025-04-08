@@ -24,6 +24,8 @@ import com.application.TicketingApp.model.TouristBean;
 import com.application.TicketingApp.model.TouristBeanList;
 import com.application.TicketingApp.service.TouristService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping(value = "/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public class TouristController 
@@ -32,6 +34,7 @@ public class TouristController
 	private TouristService service;
 	
 	@PostMapping("/register")
+	@Operation(summary="POST operation", description = "This API takes Tourist data and return String message")
 	public ResponseEntity<String> registerTourist(@RequestBody Tourist tourist)
 	{
 		try

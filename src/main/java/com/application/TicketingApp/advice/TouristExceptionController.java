@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.application.TicketingApp.exception.TouristNotfoundException;
 
+import lombok.AllArgsConstructor;
+
 @RestControllerAdvice
+@AllArgsConstructor
 public class TouristExceptionController 
 {
 	@ExceptionHandler(value = TouristNotfoundException.class,produces = {"application/xml","application/json"})
