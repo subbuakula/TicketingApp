@@ -3,6 +3,7 @@ package com.application.TicketingApp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,6 @@ import com.application.TicketingApp.model.TouristBean;
 import com.application.TicketingApp.model.TouristBeanList;
 import com.application.TicketingApp.service.TouristService;
 
-import io.swagger.v3.oas.annotations.Operation;
-
 @RestController
 @RequestMapping(value = "/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public class TouristController 
@@ -33,8 +32,11 @@ public class TouristController
 	@Autowired
 	private TouristService service;
 	
+	@Autowired
+	private Environment environment;
+	
 	@PostMapping("/register")
-	@Operation(summary="POST operation", description = "This API takes Tourist data and return String message")
+//	@Operation(summary="POST operation", description = "This API takes Tourist data and return String message")
 	public ResponseEntity<String> registerTourist(@RequestBody Tourist tourist)
 	{
 		try
@@ -51,16 +53,16 @@ public class TouristController
 	@GetMapping(value="/gettourist/{id}", produces = {"application/xml","application/json"})
 	public ResponseEntity<?> getTourist(@PathVariable("id") Integer id)
 	{
-		try
-		{
+//		try
+//		{
 				TouristBean bean = service.findById(id);
 				Link link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CourseController.class).getAllCourses()).withRel("/getAllCourses");
 			    bean.add(link);
-				return new ResponseEntity<TouristBean>(bean,HttpStatus.OK);
-		}catch(TouristNotfoundException e)
-		{
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
-		}
+ 				return new ResponseEntity<TouristBean>(bean,HttpStatus.OK);
+//		}catch(TouristNotfoundException e)
+//		{
+//			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+//		}
 	}
 
 	@GetMapping(value="alltourists", produces = {"application/xml","application/json"})
@@ -151,4 +153,12 @@ public class TouristController
 	{
 		throw new TouristNotfoundException("Custom exception");
 	}
+	
+	@GetMapping(value = "/getAppStatus")
+	public String getAppnStatus()
+	{
+		String port = environment.getProperty("server.port");
+		return "Appn is UP and running on port -> "+port;
+	}
+	
 }
