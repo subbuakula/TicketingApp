@@ -10,4 +10,7 @@ public interface CourseService
 	List<Course> findAll();
 	List<Course> findByProctor(String name);
 	List<Course> CourseByPrice(int price);
+	
+	Integer addCourse(Course course);
+	Course updateCourse(Course course);
 }

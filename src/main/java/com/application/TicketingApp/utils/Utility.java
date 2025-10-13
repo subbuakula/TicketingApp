@@ -34,6 +34,15 @@ public class Utility
 		return course;
 	}
 
+	public static CourseEntity beanToEntity(Course m)
+	{
+		CourseEntity course = new CourseEntity();
+		course.setCid(m.getCid());
+		course.setCname(m.getCname());
+		course.setCprice(m.getCprice());
+		course.setCproctor(m.getCproctor());
+		return course;
+	}
 	public static PersonModel personEntityToModel(PersonEntity pe)
 	{
 		PersonModel pm = new PersonModel();
